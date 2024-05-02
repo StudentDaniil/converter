@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="Russian">
+<head>
+    <title>Конвертер валют</title>
+</head>
+
+<body>
+<div class="center">
+    <h1 style="color: white;font-size: 42px;">Конвертер валют</h1>
+</div>
+
+<style>
+    body {
+        background-image: url('https://images.wallpaperscraft.ru/image/single/dollary_dengi_kupiury_214113_1920x1080.jpg');
+        background-size: cover; /* resize the image to cover the entire screen */
+        background-position: center center; /* center the image vertically and horizontally */
+    }
+
+    .center {
+        display: flex;
+        justify-content: center;
+    }
+
+    label {
+        color: white;
+        font-size: 30px;
+    }
+
+    .center h1 {
+        text-align: center;
+    }
+
+    .center form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+</style>
+<div class="center">
+    <form method="post">
+        <p>
+            <label>Количество:</label>
+            <label>
+                <input style="font-size: 30px" type="text" name="amount" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 8 || event.charCode == 46">
+            </label>
+        </p>
+        <p>
+            <label>Из:</label>
+            <select style="font-size: 30px" name="currency_from">
+                <option value="RU" {% if currency_from == "RU" %} selected {% endif %}>RU</option>
+                <option value="USD" {% if currency_from == "USD" %} selected {% endif %}>USD</option>
+                <option value="EUR" {% if currency_from == "EUR" %} selected {% endif %}>EUR</option>
+                <option value="GBP" {% if currency_from == "GBP" %} selected {% endif %}>GBP</option>
+                <option value="BYN" {% if currency_from == "BYN" %} selected {% endif %}>BYN</option>
+                <option value="AMD" {% if currency_from == "AMD" %} selected {% endif %}>AMD</option>
+                <option value="JPY" {% if currency_from == "JPY" %} selected {% endif %}>JPY</option>
+                <!-- Add more currency options here -->
+            </select>
+        </p>
+        <p>
+            <label>В:</label>
+            <select style="font-size: 30px" name="currency_to">
+                <option value="RU" {% if currency_to == "RU" %} selected {% endif %}>RU</option>
+                <option value="USD" {% if currency_to == "USD" %} selected {% endif %}>USD</option>
+                <option value="EUR" {% if currency_to == "EUR" %} selected {% endif %}>EUR</option>
+                <option value="GBP" {% if currency_to == "GBP" %} selected {% endif %}>GBP</option>
+                <option value="BYN" {% if currency_to == "BYN" %} selected {% endif %}>BYN</option>
+                <option value="AMD" {% if currency_to == "AMD" %} selected {% endif %}>AMD</option>
+                <option value="JPY" {% if currency_to == "JPY" %} selected {% endif %}>JPY</option>
+                <!-- Add more currency options here -->
+            </select>
+        </p>
+        <p>
+            <input style="font-size:30px" type="submit" value="Convert">
+        </p>
+    </form>
+</div>
+{% if result == "Задайте значение!" %}
+    <p style="position: absolute; top: 58%; left: 45%; color: white;font-size: 30px">{{ result }}</p>
+{% elif result=="Никаких букв!" %}
+    <p style="position: absolute; top: 58%; left: 45%; color: white;font-size: 30px">{{ result }}</p>
+{% elif result %}
+    <div style="padding: 10px; background-color: white; border: 1px solid black; position: absolute; top: 62%; left: 41%;">
+        <output style="color: black;font-size: 32px">{{ 'Результат:'+' ' +result|string + ' '+ currency_to + ' в ' + currency_from }}</output>
+    </div>{% endif %}
+</body>
+</html>
